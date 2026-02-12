@@ -29,6 +29,11 @@ $(function(){
     $(".gnbMenuWrap").removeClass("active");
   });
 
+  //m-header
+  $('.trigger').on('click',()=>{
+    $('body').toggleClass('mOpen');
+  });
+
   //modal------------------------------
   //login
   $(".login-modal").click(function(){
@@ -99,14 +104,23 @@ $(function(){
   });
 
   //mainSec2 slide--------------------------
-  let cloneCate = $(".cate-list").clone(true);
+  let cloneCate = $(".cate-list").clone(true).addClass('clone-item');
   $(cloneCate).appendTo(".mainSec2-right");
 
   //mainSec3 event-banner--------------------------
-  let eventBannerWidth = $(".event-list li").width()+25;
+  let eventBannerWidth;
+  function updateBannerWidth() {
+    eventBannerWidth = $(".event-list li").width() + 25;
+    $(".event-list").css({"left": -eventBannerWidth + "px"});
+  }
+
+  updateBannerWidth();
+
+  $(window).resize(function() {
+    updateBannerWidth();
+  });
 
   $(".event-list li:last").prependTo(".event-list");
-  $(".event-list").css({"left":-eventBannerWidth+"px"});
 
   $(".slide-btn .prev").click(function(){
     $(".event-list").stop().animate({left:"+="+eventBannerWidth+"px"},500,function(){
@@ -114,6 +128,7 @@ $(function(){
       $(this).css({left:-eventBannerWidth+"px"});
     });
   });
+
   $(".slide-btn .next").click(function(){
     $(".event-list").stop().animate({left:"-="+eventBannerWidth+"px"},500,function(){
       $(".event-list li:first-child").appendTo(".event-list");

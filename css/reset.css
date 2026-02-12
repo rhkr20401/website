@@ -38,4 +38,4 @@ input,button,select,textarea{
   outline: none; background: none; border: none;
   font-family: 'OneStoreMobileGothicBody';
 }
-p{word-break: keep-all;}
+p, strong, h1,h2,h3, span{word-break: keep-all;}
